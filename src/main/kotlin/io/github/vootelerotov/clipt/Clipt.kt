@@ -24,7 +24,7 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
     ).help("OpenAI token").default(System.getenv("CLIPT_OPEN_AI_API_TOKEN"))
     private val timeout: Duration by option(
         "--timeout"
-    ).convert { s -> s.toLong() }.convert { Duration.ofSeconds(it) }.default(Duration.ofSeconds(30))
+    ).convert { s -> s.toLong() }.convert { Duration.ofSeconds(it) }.default(Duration.ofSeconds(60))
     private val model by option(
       "-m",
       "--model",
