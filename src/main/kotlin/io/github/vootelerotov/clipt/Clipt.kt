@@ -2,10 +2,13 @@ package io.github.vootelerotov.clipt
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.groups.default
+import com.github.ajalt.clikt.parameters.groups.mutuallyExclusiveOptions
 import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.switch
 import com.theokanning.openai.completion.chat.ChatCompletionRequest
 import com.theokanning.openai.completion.chat.ChatMessage
 import com.theokanning.openai.completion.chat.ChatMessageRole
@@ -25,11 +28,18 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
     private val timeout: Duration by option(
         "--timeout"
     ).convert { s -> s.toLong() }.convert { Duration.ofSeconds(it) }.default(Duration.ofSeconds(60))
-    private val model by option(
-      "-m",
-      "--model",
-        help = "Model version to use for completion"
-    ).convert { "gpt-$it" }.default("gpt-3.5-turbo")
+
+    private val model by mutuallyExclusiveOptions(
+        option(
+            "-m",
+            "--model",
+            help = "Exact model to use for completion"
+        ),
+        option().switch(
+            "-3" to "gpt-3.5-turbo-0613",
+            "-4" to "gpt-4-0613"
+        )
+    ).default("gpt-3.5-turbo-0613")
 
     override fun run() {
         OpenAiService(openAiToken, timeout).createChatCompletion(
