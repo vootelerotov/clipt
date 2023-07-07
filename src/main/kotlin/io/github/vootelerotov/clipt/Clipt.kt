@@ -36,8 +36,8 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
             help = "Exact model to use for completion"
         ),
         option().switch(
-            "-3" to "gpt-3.5-turbo-0613",
-            "-4" to "gpt-4-0613"
+            "-3" to "gpt-3.5-turbo",
+            "-4" to "gpt-4"
         )
     ).default("gpt-3.5-turbo-0613")
 
