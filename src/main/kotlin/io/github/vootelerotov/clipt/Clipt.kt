@@ -6,6 +6,7 @@ import com.github.ajalt.clikt.parameters.groups.default
 import com.github.ajalt.clikt.parameters.groups.mutuallyExclusiveOptions
 import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.options.defaultLazy
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.switch
@@ -24,7 +25,7 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
     private val openAiToken by option(
         "-t",
         "--token",
-    ).help("OpenAI token").default(System.getenv("CLIPT_OPEN_AI_API_TOKEN"))
+    ).help("OpenAI token").defaultLazy { System.getenv("CLIPT_OPEN_AI_API_TOKEN") }
     private val timeout: Duration by option(
         "--timeout"
     ).convert { s -> s.toLong() }.convert { Duration.ofSeconds(it) }.default(Duration.ofSeconds(60))
