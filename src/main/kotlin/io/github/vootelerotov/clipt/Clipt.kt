@@ -46,7 +46,7 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
         OpenAiService(openAiToken, timeout).createChatCompletion(
             ChatCompletionRequest.builder()
                 .messages(listOf(
-                    ChatMessage(SYSTEM.value(), "You are a CLI tool that answers questions. If you output code, you ONLY output code."),
+                    ChatMessage(SYSTEM.value(), "You are a CLI tool that answers questions. If you output code, you ONLY output code, without formatting."),
                     ChatMessage(ChatMessageRole.USER.value(), prompt)
                 ))
                 .model(model)
