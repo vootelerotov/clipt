@@ -38,10 +38,12 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
         ),
         option().switch(
             "-3" to "gpt-3.5-turbo",
-            "-4" to "gpt-4",
-            "-p" to "gpt-4-1106-preview"
+            "-4" to "ggpt-4-1106-preview",
+            "--4.0" to "gpt-4",
+            "--3.5t" to "gpt-3.5-turbo",
+            "--4.0t" to "gpt-4-1106-preview",
         )
-    ).default("gpt-4")
+    ).default("gpt-4-1106-preview")
 
     override fun run() {
         OpenAiService(openAiToken, timeout).createChatCompletion(
