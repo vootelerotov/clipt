@@ -53,7 +53,7 @@ class Clipt: CliktCommand(help = "A command line interface for the OpenAI GPT-3 
                     ChatMessage(ChatMessageRole.USER.value(), prompt)
                 ))
                 .model(model)
-                .maxTokens(1500)
+                .maxTokens(4096)
                 .temperature(0.30)
                 .n(1)
                 .build()
